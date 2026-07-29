@@ -1,0 +1,76 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Mapu Navigation Flow" id="kVIPruTzDGKHWTsoLzjm">
+    <mxGraphModel dx="1437" dy="936" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Startup Screen&#xa;(Entry Point)" vertex="1">
+          <mxGeometry height="70" width="180" x="170" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-2" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Already logged in&#xa;and within a&#xa;valid session?" vertex="1">
+          <mxGeometry height="120" width="170" x="175" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="Login Screen" vertex="1">
+          <mxGeometry height="70" width="180" x="170" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-4" parent="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" value="Login&#xa;successful?" vertex="1">
+          <mxGeometry height="110" width="150" x="560" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" value="Show error message&#xa;and stay on&#xa;Login Screen" vertex="1">
+          <mxGeometry height="70" width="210" x="530" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Guides List Screen" vertex="1">
+          <mxGeometry height="80" width="210" x="530" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-7" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" value="Guide Details&#xa;Screen" vertex="1">
+          <mxGeometry height="80" width="190" x="940" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-8" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" value="Profile Screen" vertex="1">
+          <mxGeometry height="80" width="190" x="940" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-9" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-1" target="vzFOVYtf3vTedj-dEVg6-2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-10" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-2" target="vzFOVYtf3vTedj-dEVg6-6" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-11" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-2" target="vzFOVYtf3vTedj-dEVg6-3" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-12" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-3" target="vzFOVYtf3vTedj-dEVg6-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-13" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-4" target="vzFOVYtf3vTedj-dEVg6-6" value="Yes">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-14" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-4" target="vzFOVYtf3vTedj-dEVg6-5" value="No">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-15" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-5" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="vzFOVYtf3vTedj-dEVg6-3">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="310" y="655" />
+            </Array>
+            <mxPoint x="480" y="670" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-16" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-6" style="exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="vzFOVYtf3vTedj-dEVg6-7" value="Click on item in list">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-17" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-6" style="exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="vzFOVYtf3vTedj-dEVg6-8" value="Click on profile icon">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="vzFOVYtf3vTedj-dEVg6-18" edge="1" parent="1" source="vzFOVYtf3vTedj-dEVg6-8" style="entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" target="vzFOVYtf3vTedj-dEVg6-3" value="Click Sign Out">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1035" y="770" />
+              <mxPoint x="260" y="770" />
+            </Array>
+            <mxPoint x="940" y="284.51612903225805" as="sourcePoint" />
+            <mxPoint x="260" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
