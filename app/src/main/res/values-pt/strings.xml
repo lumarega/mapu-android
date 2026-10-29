@@ -1,5 +1,5 @@
 <resources>
-    <string name="login_subtitle">Guias de cidades com curadoria no seu mapa</string>
+    <string name="login_subtitle">Guias de cidades com curadoria para você!</string>
     <string name="login_sign_in_with_google">Fazer login com o Google</string>
     <string name="login_signing_in">Fazendo login</string>
     <string name="login_error_no_google_account">Nenhuma conta do Google encontrada neste dispositivo. Adicione uma conta nas configurações do dispositivo e tente novamente.</string>

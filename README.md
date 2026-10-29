@@ -53,8 +53,8 @@ Both are bundled as variable fonts in `res/font` (SIL Open Font License).
 
 | Login | Guides | Profile |
 |---|---|---|
-| <img src="docs/design/login-light.png" width="240" alt="Login screen, light"> | <img src="docs/design/guides-light.png" width="240" alt="Guides screen, light"> | <img src="docs/design/profile-light.png" width="240" alt="Profile screen, light"> |
-| <img src="docs/design/login-dark.png" width="240" alt="Login screen, dark"> | <img src="docs/design/guides-dark.png" width="240" alt="Guides screen, dark"> | <img src="docs/design/profile-dark.png" width="240" alt="Profile screen, dark"> |
+| <img src="documentation/design/login-light.png" width="240" alt="Login screen, light"> | <img src="documentation/design/guides-light.png" width="240" alt="Guides screen, light"> | <img src="documentation/design/profile-light.png" width="240" alt="Profile screen, light"> |
+| <img src="documentation/design/login-dark.png" width="240" alt="Login screen, dark"> | <img src="documentation/design/guides-dark.png" width="240" alt="Guides screen, dark"> | <img src="documentation/design/profile-dark.png" width="240" alt="Profile screen, dark"> |
 
 ## Architecture
 

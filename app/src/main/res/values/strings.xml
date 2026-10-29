@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Mapu</string>
-    <string name="login_subtitle">Curated city guides on your map</string>
+    <string name="login_subtitle">Curated city guides for you!</string>
     <string name="login_sign_in_with_google">Sign in with Google</string>
     <string name="login_signing_in">Signing in</string>
     <string name="login_error_no_google_account">No Google account found on this device. Add one in your device settings and try again.</string>
