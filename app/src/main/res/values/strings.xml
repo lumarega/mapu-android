@@ -1,3 +1,14 @@
 <resources>
-    <string name="app_name">Mapu</string>
+    <string name="app_name" translatable="false">Mapu</string>
+    <string name="login_subtitle">Curated city guides on your map</string>
+    <string name="login_sign_in_with_google">Sign in with Google</string>
+    <string name="login_signing_in">Signing in</string>
+    <string name="login_error_no_google_account">No Google account found on this device. Add one in your device settings and try again.</string>
+    <string name="login_play_services_update_title">Update Google Play services</string>
+    <string name="login_error_play_services_update_required">Signing in needs a newer version of Google Play services. Update it, then come back and sign in.</string>
+    <string name="login_play_services_update_confirm">Update</string>
+    <string name="login_play_services_update_dismiss">Not now</string>
+    <string name="login_error_play_services_unavailable">Mapu isn\'t supported on this device. It needs Google Play services to sign in, which this device doesn\'t have.</string>
+    <string name="login_error_sign_in_failed">Something went wrong signing you in. Please try again.</string>
+    <string name="home_title">Home</string>
 </resources>

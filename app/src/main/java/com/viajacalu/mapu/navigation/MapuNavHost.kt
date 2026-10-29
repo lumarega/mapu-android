@@ -6,7 +6,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.viajacalu.mapu.feature.auth.presentation.LoginScreen
+import com.viajacalu.mapu.feature.auth.presentation.LoginRoute
 import com.viajacalu.mapu.feature.home.presentation.HomeScreen
 
 @Composable
@@ -21,7 +21,13 @@ fun MapuNavHost(
         modifier = modifier
     ) {
         composable<MapuDestination.Login> {
-            LoginScreen()
+            LoginRoute(
+                onSignedIn = {
+                    navController.navigate(MapuDestination.Home) {
+                        popUpTo<MapuDestination.Login> { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable<MapuDestination.Home> {
