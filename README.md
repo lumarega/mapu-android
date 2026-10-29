@@ -56,6 +56,15 @@ Both are bundled as variable fonts in `res/font` (SIL Open Font License).
 | <img src="documentation/design/login-light.png" width="240" alt="Login screen, light"> | <img src="documentation/design/guides-light.png" width="240" alt="Guides screen, light"> | <img src="documentation/design/profile-light.png" width="240" alt="Profile screen, light"> |
 | <img src="documentation/design/login-dark.png" width="240" alt="Login screen, dark"> | <img src="documentation/design/guides-dark.png" width="240" alt="Guides screen, dark"> | <img src="documentation/design/profile-dark.png" width="240" alt="Profile screen, dark"> |
 
+#### Login errors and alerts
+
+Errors appear in a card above the Sign in button, so screen readers announce them before the retry action. When Google Play services is missing, the button is hidden because retrying can't help. When it needs updating, a dialog asks the user to update it.
+
+| No Google account | Sign-in failed | Update Play services | Play services unavailable |
+|---|---|---|---|
+| <img src="documentation/design/login-no-account-light.png" width="180" alt="Login, no Google account error, light"> | <img src="documentation/design/login-failed-light.png" width="180" alt="Login, sign-in failed error, light"> | <img src="documentation/design/login-update-light.png" width="180" alt="Login, update Google Play services dialog, light"> | <img src="documentation/design/login-unavailable-light.png" width="180" alt="Login, Google Play services unavailable error, light"> |
+| <img src="documentation/design/login-no-account-dark.png" width="180" alt="Login, no Google account error, dark"> | <img src="documentation/design/login-failed-dark.png" width="180" alt="Login, sign-in failed error, dark"> | <img src="documentation/design/login-update-dark.png" width="180" alt="Login, update Google Play services dialog, dark"> | <img src="documentation/design/login-unavailable-dark.png" width="180" alt="Login, Google Play services unavailable error, dark"> |
+
 ## Architecture
 
 <img width="800" height="500" alt="Mapu Flow Diagram" src="https://github.com/user-attachments/assets/4f6d2481-abc1-423e-814f-41b886f29859" />
