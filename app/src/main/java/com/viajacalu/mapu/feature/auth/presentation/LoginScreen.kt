@@ -1,15 +1,31 @@
 package com.viajacalu.mapu.feature.auth.presentation
 
+import android.content.res.Configuration
+import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -20,13 +36,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -75,27 +92,60 @@ fun LoginScreen(
     onErrorDismissed: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    BoxWithConstraints(modifier = modifier.fillMaxSize()) {
+        // Min height lets the spacer push the sign in area to the bottom, while still scrolling on small screens
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(rememberScrollState())
+                .heightIn(min = maxHeight)
+                .padding(horizontal = 24.dp, vertical = 16.dp)
+        ) {
+            LoginIllustration(modifier = Modifier.fillMaxWidth())
+
+            Text(
+                text = stringResource(R.string.app_name),
+                style = MaterialTheme.typography.displayLarge,
+                color = MaterialTheme.colorScheme.primary,
+                modifier = Modifier
+                    .padding(start = 4.dp, top = 32.dp)
+                    .semantics { heading() }
+            )
+
+            Text(
+                text = stringResource(R.string.login_subtitle),
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier.padding(start = 4.dp, top = 8.dp)
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .heightIn(min = 32.dp)
+                    .weight(1f)
+            )
+
+            SignInArea(
+                uiState = uiState,
+                onSignInClick = onSignInClick,
+                onUpdatePlayServicesClick = onUpdatePlayServicesClick,
+                onErrorDismissed = onErrorDismissed
+            )
+        }
+    }
+}
+
+@Composable
+private fun SignInArea(
+    uiState: LoginUiState,
+    onSignInClick: () -> Unit,
+    onUpdatePlayServicesClick: () -> Unit,
+    onErrorDismissed: () -> Unit
+) {
     Column(
-        modifier = modifier
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState())
-            .padding(24.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = Modifier.fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = stringResource(R.string.app_name),
-            style = MaterialTheme.typography.displayMedium,
-            modifier = Modifier.semantics { heading() }
-        )
-
-        Text(
-            text = stringResource(R.string.login_subtitle),
-            style = MaterialTheme.typography.bodyLarge,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.padding(top = 8.dp)
-        )
-
         when (uiState) {
             // Keeps showing progress on success until navigation to Home happens
             LoginUiState.Loading, LoginUiState.LoginSuccess -> SigningInIndicator()
@@ -115,14 +165,15 @@ fun LoginScreen(
                     )
                 }
 
+                // Message sits above the button so it is read before the retry action
                 LoginError.NoGoogleAccount -> {
-                    SignInButton(onClick = onSignInClick)
                     ErrorMessage(R.string.login_error_no_google_account)
+                    SignInButton(onClick = onSignInClick)
                 }
 
                 LoginError.SignInFailed -> {
-                    SignInButton(onClick = onSignInClick)
                     ErrorMessage(R.string.login_error_sign_in_failed)
+                    SignInButton(onClick = onSignInClick)
                 }
             }
         }
@@ -131,38 +182,76 @@ fun LoginScreen(
 
 @Composable
 private fun SignInButton(onClick: () -> Unit) {
-    Button(
+    OutlinedButton(
         onClick = onClick,
-        modifier = Modifier.padding(top = 32.dp)
+        colors = ButtonDefaults.outlinedButtonColors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerLowest,
+            contentColor = MaterialTheme.colorScheme.onSurface
+        ),
+        border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(56.dp)
     ) {
-        Text(text = stringResource(R.string.login_sign_in_with_google))
+        Image(
+            painter = painterResource(R.drawable.ic_google_logo),
+            contentDescription = null,
+            modifier = Modifier.size(20.dp)
+        )
+        Spacer(modifier = Modifier.width(12.dp))
+        Text(
+            text = stringResource(R.string.login_sign_in_with_google),
+            style = MaterialTheme.typography.titleMedium
+        )
     }
 }
 
 @Composable
 private fun SigningInIndicator() {
     val signingInDescription = stringResource(R.string.login_signing_in)
-    CircularProgressIndicator(
+    // Same height as the button so the layout doesn't jump while signing in
+    Box(
+        contentAlignment = Alignment.Center,
         modifier = Modifier
-            .padding(top = 32.dp)
-            .semantics {
-                contentDescription = signingInDescription
-                liveRegion = LiveRegionMode.Polite
-            }
-    )
+            .fillMaxWidth()
+            .height(56.dp)
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier
+                .size(32.dp)
+                .semantics {
+                    contentDescription = signingInDescription
+                    liveRegion = LiveRegionMode.Polite
+                }
+        )
+    }
 }
 
 @Composable
 private fun ErrorMessage(messageRes: Int) {
-    Text(
-        text = stringResource(messageRes),
-        color = MaterialTheme.colorScheme.error,
-        style = MaterialTheme.typography.bodyMedium,
-        textAlign = TextAlign.Center,
+    Surface(
+        color = MaterialTheme.colorScheme.errorContainer,
+        contentColor = MaterialTheme.colorScheme.onErrorContainer,
+        shape = RoundedCornerShape(16.dp),
         modifier = Modifier
-            .padding(top = 16.dp)
+            .fillMaxWidth()
             .semantics { liveRegion = LiveRegionMode.Polite }
-    )
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            modifier = Modifier.padding(16.dp)
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_info),
+                contentDescription = null,
+                modifier = Modifier.size(20.dp)
+            )
+            Text(
+                text = stringResource(messageRes),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
 }
 
 @Composable
@@ -187,31 +276,50 @@ private fun UpdatePlayServicesDialog(
     )
 }
 
-@Preview(showBackground = true)
+@Preview(device = Devices.PIXEL_7)
 @Composable
 fun LoginScreenIdlePreview() {
     LoginScreenPreview(LoginUiState.Idle)
 }
 
-@Preview(showBackground = true)
+@Preview(device = Devices.PIXEL_7, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun LoginScreenIdleDarkPreview() {
+    LoginScreenPreview(LoginUiState.Idle)
+}
+
+@Preview(device = Devices.PIXEL_7)
 @Composable
 fun LoginScreenLoadingPreview() {
     LoginScreenPreview(LoginUiState.Loading)
 }
 
-@Preview(showBackground = true)
+@Preview(device = Devices.PIXEL_7)
 @Composable
 fun LoginScreenSignInFailedPreview() {
     LoginScreenPreview(LoginUiState.Error(LoginError.SignInFailed))
 }
 
-@Preview(showBackground = true)
+@Preview(device = Devices.PIXEL_7, uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun LoginScreenNoGoogleAccountDarkPreview() {
+    LoginScreenPreview(LoginUiState.Error(LoginError.NoGoogleAccount))
+}
+
+// Small screen and large text make the content taller than the screen, so it should scroll (use Interactive Mode)
+@Preview(device = "spec:width=360dp,height=640dp", fontScale = 1.5f)
+@Composable
+fun LoginScreenSmallScreenPreview() {
+    LoginScreenPreview(LoginUiState.Error(LoginError.SignInFailed))
+}
+
+@Preview(device = Devices.PIXEL_7)
 @Composable
 fun LoginScreenPlayServicesUpdatePreview() {
     LoginScreenPreview(LoginUiState.Error(LoginError.PlayServicesUpdateRequired))
 }
 
-@Preview(showBackground = true)
+@Preview(device = Devices.PIXEL_7)
 @Composable
 fun LoginScreenPlayServicesUnavailablePreview() {
     LoginScreenPreview(LoginUiState.Error(LoginError.PlayServicesUnavailable))
@@ -220,11 +328,14 @@ fun LoginScreenPlayServicesUnavailablePreview() {
 @Composable
 private fun LoginScreenPreview(uiState: LoginUiState) {
     MapuTheme {
-        LoginScreen(
-            uiState = uiState,
-            onSignInClick = {},
-            onUpdatePlayServicesClick = {},
-            onErrorDismissed = {}
-        )
+        // Stands in for the app Scaffold, which paints the background at runtime
+        Surface(color = MaterialTheme.colorScheme.background) {
+            LoginScreen(
+                uiState = uiState,
+                onSignInClick = {},
+                onUpdatePlayServicesClick = {},
+                onErrorDismissed = {}
+            )
+        }
     }
 }
