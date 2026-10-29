@@ -1,0 +1,13 @@
+<resources>
+    <string name="login_subtitle">Guias de cidades com curadoria no seu mapa</string>
+    <string name="login_sign_in_with_google">Fazer login com o Google</string>
+    <string name="login_signing_in">Fazendo login</string>
+    <string name="login_error_no_google_account">Nenhuma conta do Google encontrada neste dispositivo. Adicione uma conta nas configurações do dispositivo e tente novamente.</string>
+    <string name="login_play_services_update_title">Atualize o Google Play Services</string>
+    <string name="login_error_play_services_update_required">Para fazer login, é preciso uma versão mais recente do Google Play Services. Atualize e depois volte para fazer login.</string>
+    <string name="login_play_services_update_confirm">Atualizar</string>
+    <string name="login_play_services_update_dismiss">Agora não</string>
+    <string name="login_error_play_services_unavailable">O Mapu não é compatível com este dispositivo. Ele precisa do Google Play Services para fazer login, e este dispositivo não tem.</string>
+    <string name="login_error_sign_in_failed">Algo deu errado ao fazer seu login. Tente novamente.</string>
+    <string name="home_title">Início</string>
+</resources>
