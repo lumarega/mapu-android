@@ -4,6 +4,11 @@ A place to simply organise the ongoing and future work.
 
 ## Next Up
 
+### Project set up
+- [x] Restructure packages by feature (feature/<name>/data, domain, presentation and di) with shared code in core
+
+- [x] Colour theme and typography
+
 ### Launch screen
 - [x] Launch screen and VM - doesn't do anything for now
 
@@ -11,15 +16,23 @@ A place to simply organise the ongoing and future work.
 
 ### Authentication
 
-The login screen, it will have a viewModel, a view and a repository. Initially it will fetch a boolean value locally and then navigate to the home screen if loggedIn is true or display an error if false.
+The login screen, it has a viewModel, a view and a repository. Users sign in with their Google account through Credential Manager, and the Google token is used to sign in to Firebase Auth. Firebase keeps the session, so returning users go straight to the Home screen.
 
-- [ ] Login repository - saves and fetches a boolean value from DataSource (for now).
+- [x] Firebase set up - Firebase project, google-services.json and Firebase Auth. API key restricted to the Android app.
 
-- [ ] Login viewModel - fetches from the Login repository and sets the view state.
+- [x] Login repository - signs in to Firebase with the Google token and checks if the user is logged in, through an AuthDataSource.
 
-- [ ] Login screen UI - a simple login screen that has a login success boolean flag and a login button.
+- [x] Hilt set up - inject the Login repository into the viewModels.
 
-- [ ] Handle login errors - if login failure display an error message
+- [x] Login viewModel - sealed LoginUiState (Idle, Loading, LoginSuccess and Error) based on the Google and Firebase sign in results.
+
+- [x] Login screen UI - Google sign in button, loading indicator and navigation to Home after login. Styled to match the design mock-ups.
+
+- [x] Handle login errors - no Google account, sign in failed, Google Play services needs an update (dialog that opens the Play Store) and device not supported.
+
+- [x] Accessibility - reviewed against WCAG AA (contrast, headings, screen reader announcements, scrolling with large text).
+
+- [x] Portuguese translations
 
 ### Home screen
 - [ ] Home - Create a Home screen that will have 2 tabs: Guides and Profile
@@ -63,7 +76,7 @@ Where the guide details will be. It will have a ViewModel, a view and a reposito
 
 ## Future Features
 
-- [ ] Integrate Google Sign-In
+- [x] Integrate Google Sign-In
 - [ ] My Guides feature - a new tab in the Home screen where the saved guides will be shown.
 - [ ] Implement Google Maps SDK
 - [ ] Offline support
@@ -75,10 +88,10 @@ Where the guide details will be. It will have a ViewModel, a view and a reposito
 
 ## Bugs
 
-- None
+- [ ] Login screen sometimes keeps loading after skipping Google's add account screen. Couldn't reproduce it yet, needs investigating.
 
 ---
 
 ## Technical Debt
 
-- [ ] Add Hilt for dependency injection later on
+- [x] Add Hilt for dependency injection
