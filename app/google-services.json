@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "622993331606",
+    "project_id": "mapu-28c02",
+    "storage_bucket": "mapu-28c02.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:622993331606:android:3d8e55aa6eadc1f9dfb9b7",
+        "android_client_info": {
+          "package_name": "com.viajacalu.mapu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "622993331606-o98vliuao9iosdppvsbfkb37uub8uu00.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.viajacalu.mapu",
+            "certificate_hash": "c261cfbaf0303ae3a3b8b4d3a6d4cfc27af82e9e"
+          }
+        },
+        {
+          "client_id": "622993331606-kukr6t5f4pbp98mbqonepopb2vikjcpr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfepWF3UT1_K5XBHOkk1TDdGgbywLM66Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "622993331606-kukr6t5f4pbp98mbqonepopb2vikjcpr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
