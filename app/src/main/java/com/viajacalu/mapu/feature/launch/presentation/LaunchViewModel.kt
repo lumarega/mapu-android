@@ -1,4 +1,4 @@
-package com.viajacalu.mapu.launch
+package com.viajacalu.mapu.feature.launch.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

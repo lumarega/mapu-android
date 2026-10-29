@@ -1,4 +1,4 @@
-package com.viajacalu.mapu.launch
+package com.viajacalu.mapu.feature.launch.presentation
 
 sealed interface LaunchUiEvent {
     data object LoggedIn : LaunchUiEvent

@@ -1,4 +1,4 @@
-package com.viajacalu.mapu.ui.theme
+package com.viajacalu.mapu.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 

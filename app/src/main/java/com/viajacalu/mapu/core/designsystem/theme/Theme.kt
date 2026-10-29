@@ -1,4 +1,4 @@
-package com.viajacalu.mapu.ui.theme
+package com.viajacalu.mapu.core.designsystem.theme
 
 import android.app.Activity
 import android.os.Build

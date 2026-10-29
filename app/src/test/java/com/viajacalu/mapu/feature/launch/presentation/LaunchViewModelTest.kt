@@ -1,4 +1,4 @@
-package com.viajacalu.mapu.launch
+package com.viajacalu.mapu.feature.launch.presentation
 
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.async
