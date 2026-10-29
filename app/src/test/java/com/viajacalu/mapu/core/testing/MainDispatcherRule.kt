@@ -1,4 +1,4 @@
-package com.viajacalu.mapu.feature.launch.presentation
+package com.viajacalu.mapu.core.testing
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
