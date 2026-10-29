@@ -5,9 +5,9 @@ A place to simply organise the ongoing and future work.
 ## Next Up
 
 ### Launch screen
-- [ ] Launch screen and VM - doesn't do anything for now
+- [x] Launch screen and VM - doesn't do anything for now
 
-- [ ] Set up Navigation graph
+- [x] Set up Navigation graph
 
 ### Authentication
 
