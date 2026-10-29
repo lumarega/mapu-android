@@ -26,6 +26,36 @@ Mapu (Map for You) is a travel guide application that helps users discover curat
 - Language support (Portuguese and English Localization)
 - Build with Accessibility in mind (screen reader and design requirements)
 
+## Design
+
+Simple and elegant, with an editorial travel-guide feel. Theme lives in `core/designsystem/theme`.
+
+### Colour palette (Vino)
+
+| Role | Light | Dark | Use |
+|---|---|---|---|
+| Primary | Marsala `#7A2E3A` | `#E3A48F` | Logo, main actions, featured content |
+| Secondary | Deep green `#2F4A3C` | `#A9CDB6` | Nature and map cues, selected states |
+| Tertiary | Burnt orange `#B5541C` | `#F0A473` | Pins and highlights |
+| Accent | Ochre `#B8953A` | `#D9BC6E` | Small badges only (not for text) |
+| Background | `#FAF6F1` | `#171213` | Warm off-white / warm near-black |
+
+Containers use warm clay and sand tints rather than pink, so the palette stays neutral. Dynamic colour is off so the brand palette always shows.
+
+### Typography
+
+- **Fraunces** (serif) for display, headline and large titles
+- **Manrope** (sans-serif) for titles, body and labels
+
+Both are bundled as variable fonts in `res/font` (SIL Open Font License).
+
+### Mock-ups
+
+| Login | Guides | Profile |
+|---|---|---|
+| <img src="docs/design/login-light.png" width="240" alt="Login screen, light"> | <img src="docs/design/guides-light.png" width="240" alt="Guides screen, light"> | <img src="docs/design/profile-light.png" width="240" alt="Profile screen, light"> |
+| <img src="docs/design/login-dark.png" width="240" alt="Login screen, dark"> | <img src="docs/design/guides-dark.png" width="240" alt="Guides screen, dark"> | <img src="docs/design/profile-dark.png" width="240" alt="Profile screen, dark"> |
+
 ## Architecture
 
 <img width="800" height="500" alt="Mapu Flow Diagram" src="https://github.com/user-attachments/assets/4f6d2481-abc1-423e-814f-41b886f29859" />
