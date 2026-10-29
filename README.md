@@ -6,7 +6,7 @@ Mapu (Map for You) is a travel guide application that helps users discover curat
 ### Features
 - Sign In screen integrated with Google Sign In
 - Guides tab to browse available guide maps
-- Open guide details and display embedded Google My Map
+- Open guide details and display a map with suggested places, with pins by category and place details
 - Profile tab
 - Support English and Portuguese localisation
 - Support Dark mode
@@ -23,6 +23,7 @@ Mapu (Map for You) is a travel guide application that helps users discover curat
 - Unit Tests
 - Modular, scalable architecture
 - Google Sign In for login
+- MapLibre with OpenFreeMap for the maps, with places from Google My Maps (KML)
 - Language support (Portuguese and English Localization)
 - Build with Accessibility in mind (screen reader and design requirements)
 
@@ -65,14 +66,29 @@ Errors appear in a card above the Sign in button, so screen readers announce the
 | <img src="documentation/design/login-no-account-light.png" width="180" alt="Login, no Google account error, light"> | <img src="documentation/design/login-failed-light.png" width="180" alt="Login, sign-in failed error, light"> | <img src="documentation/design/login-update-light.png" width="180" alt="Login, update Google Play services dialog, light"> | <img src="documentation/design/login-unavailable-light.png" width="180" alt="Login, Google Play services unavailable error, light"> |
 | <img src="documentation/design/login-no-account-dark.png" width="180" alt="Login, no Google account error, dark"> | <img src="documentation/design/login-failed-dark.png" width="180" alt="Login, sign-in failed error, dark"> | <img src="documentation/design/login-update-dark.png" width="180" alt="Login, update Google Play services dialog, dark"> | <img src="documentation/design/login-unavailable-dark.png" width="180" alt="Login, Google Play services unavailable error, dark"> |
 
+## Maps
+
+Each city guide is a map I create in Google My Maps, with one layer per category (Restaurants, Museums, Parks, ...). The app downloads the map as KML, turns each pin into a `Place` and draws it natively with [MapLibre](https://maplibre.org) on an [OpenFreeMap](https://openfreemap.org) base map.
+
+Why this approach:
+- **Easy to edit** - places are managed in My Maps, so updating a guide doesn't need a new app release.
+- **Native experience** - custom pins and colours, dark mode, accessibility and a bottom sheet with place details, which an embedded My Maps web view can't offer.
+- **Free** - OpenFreeMap needs no API key or billing account. The Google Maps SDK needs a billing account, even though its native maps are free.
+- **Easy to change** - screens only use the app's own `Guide` and `Place` models. Moving the places to a backend or changing the map provider only changes the data source or the map composable.
+
+In the MVP, the guides list comes from a local JSON file, with the city details and the My Maps id for each guide.
+
 ## Architecture
 
 <img width="800" height="500" alt="Mapu Flow Diagram" src="https://github.com/user-attachments/assets/4f6d2481-abc1-423e-814f-41b886f29859" />
 
 ## Roadmap
 
-- Guide details view, Integrate with Google Maps SDK, and have a list of places I want to display that will be fetched either locally in a JSON file/ Room database (first / fastest solution for now) or from a backend service (ideal / for later on because it adds complexity of creating an api and database that can store and manage user details, lists of places and locations to be rendered in the map), then we’ll render each pin in the map with some information about it and users can interact with the map. This new map will replace the embedded static map.
-- My maps tab, where a list of the saved maps is. Basically a list of the maps the person has copied to their account, so basically they can view the Maps in the Guide tab and copy them over to their account. (Still thinking if we allow copying the whole maps or add it to their selected map in a pin by pin basis, as in, they click on the pins in our pre-made maps and can add them to one of their own maps, so basically a list of available maps would be displayed and they would choose in which map they want to save it. Ideally there will be a database with their saved maps and the pins in each map that we can then render to the user and allow them to edit or remove from the map. Google Maps API charges for Places search so for this app we’ll only allow them to copy places from the existing map guides (which will be already saved in our database), they will not be able to search for places as they would do in the google maps website.
-- Support offline mode so people can see the maps offline (to be implemented in the future) 
+Ideas for after the MVP. Still to be defined.
 
-
+- **My maps tab** - a list of the guides the user saved, like favourites, stored per user in Firestore.
+- **Map styling** - customise the map style with the app colour palette, in light and dark mode.
+- **Guides from Firestore** - move the guides list to Firestore, only readable by signed-in users, so it can change without a new release.
+- **Custom maps** - users copy pins from the guides into their own maps (e.g. "My London"), which are saved in Firestore and drawn with the same map screen. Google My Maps has no API, so they can't be saved to the user's own My Maps account. Users can only copy places from the existing guides, not search for new ones, since Google charges for Places search.
+- **Paid guides** - sell access per guide. This means moving the places from public My Maps to Firestore, with security rules so only users who bought a guide can read it.
+- **Offline mode** - cache the guides and places, and store the map tiles offline (e.g. with Protomaps).
