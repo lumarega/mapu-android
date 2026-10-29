@@ -1,15 +1,14 @@
 package com.viajacalu.mapu.feature.auth.data
 
-import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.auth.auth
 import com.viajacalu.mapu.feature.auth.domain.AuthUser
 import kotlinx.coroutines.tasks.await
+import javax.inject.Inject
 
-class FirebaseAuthDataSource(
-    private val firebaseAuth: FirebaseAuth = Firebase.auth
+class FirebaseAuthDataSource @Inject constructor(
+    private val firebaseAuth: FirebaseAuth
 ) : AuthDataSource {
 
     override fun getCurrentUser(): AuthUser? = firebaseAuth.currentUser?.toAuthUser()

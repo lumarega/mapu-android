@@ -2,9 +2,10 @@ package com.viajacalu.mapu.feature.auth.data
 
 import com.viajacalu.mapu.feature.auth.domain.AuthUser
 import com.viajacalu.mapu.feature.auth.domain.LoginRepository
+import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-class LoginRepositoryImpl(
+class LoginRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource
 ) : LoginRepository {
 
