@@ -39,6 +39,14 @@ android {
     buildFeatures {
         compose = true
     }
+    testOptions {
+        // Lets Robolectric tests read the app's resources, like strings and drawables
+        unitTests.isIncludeAndroidResources = true
+        unitTests.all {
+            // Robolectric needs this on Java 21+ to emulate Android 16 (SDK 36)
+            it.jvmArgs("--add-exports", "java.base/jdk.internal.access=ALL-UNNAMED")
+        }
+    }
 }
 
 dependencies {
@@ -66,6 +74,11 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.androidx.junit)
+    testImplementation(platform(libs.androidx.compose.bom))
+    testImplementation(libs.androidx.compose.ui.test.junit4)
+    testImplementation(libs.androidx.navigation.testing)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     androidTestImplementation(libs.androidx.espresso.core)
