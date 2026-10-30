@@ -1,7 +1,7 @@
 package com.viajacalu.mapu.feature.auth.presentation
 
+import com.viajacalu.mapu.core.testing.FakeAuthRepository
 import com.viajacalu.mapu.core.testing.MainDispatcherRule
-import com.viajacalu.mapu.feature.auth.domain.FakeLoginRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
@@ -15,7 +15,7 @@ class LoginViewModelTest {
     @get:Rule
     val mainDispatcherRule = MainDispatcherRule()
 
-    private val repository = FakeLoginRepository()
+    private val repository = FakeAuthRepository()
 
     @Test
     fun `initial state is Idle`() {

@@ -1,12 +1,12 @@
-package com.viajacalu.mapu.feature.auth.di
+package com.viajacalu.mapu.core.auth.di
 
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
-import com.viajacalu.mapu.feature.auth.data.AuthDataSource
-import com.viajacalu.mapu.feature.auth.data.FirebaseAuthDataSource
-import com.viajacalu.mapu.feature.auth.data.LoginRepositoryImpl
-import com.viajacalu.mapu.feature.auth.domain.LoginRepository
+import com.viajacalu.mapu.core.auth.data.AuthDataSource
+import com.viajacalu.mapu.core.auth.data.AuthRepositoryImpl
+import com.viajacalu.mapu.core.auth.data.FirebaseAuthDataSource
+import com.viajacalu.mapu.core.auth.domain.AuthRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -20,7 +20,7 @@ abstract class AuthModule {
 
     @Binds
     @Singleton
-    abstract fun bindLoginRepository(impl: LoginRepositoryImpl): LoginRepository
+    abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 
     @Binds
     @Singleton

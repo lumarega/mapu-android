@@ -1,17 +1,17 @@
-package com.viajacalu.mapu.feature.auth.data
+package com.viajacalu.mapu.core.auth.data
 
-import com.viajacalu.mapu.feature.auth.domain.AuthUser
-import com.viajacalu.mapu.feature.auth.domain.LoginRepository
+import com.viajacalu.mapu.core.auth.domain.AuthRepository
+import com.viajacalu.mapu.core.model.User
 import javax.inject.Inject
 import kotlin.coroutines.cancellation.CancellationException
 
-class LoginRepositoryImpl @Inject constructor(
+class AuthRepositoryImpl @Inject constructor(
     private val authDataSource: AuthDataSource
-) : LoginRepository {
+) : AuthRepository {
 
     override fun isLoggedIn(): Boolean = authDataSource.getCurrentUser() != null
 
-    override suspend fun signInWithGoogle(idToken: String): Result<AuthUser> =
+    override suspend fun signInWithGoogle(idToken: String): Result<User> =
         try {
             Result.success(authDataSource.signInWithGoogle(idToken))
         } catch (e: CancellationException) {

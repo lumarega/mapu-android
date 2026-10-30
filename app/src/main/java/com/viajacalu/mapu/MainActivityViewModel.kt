@@ -2,7 +2,7 @@ package com.viajacalu.mapu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.viajacalu.mapu.feature.auth.domain.LoginRepository
+import com.viajacalu.mapu.core.auth.domain.AuthRepository
 import com.viajacalu.mapu.navigation.MapuDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val loginRepository: LoginRepository
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<MainUiState>(MainUiState.Loading)
     val uiState = _uiState.asStateFlow()
@@ -23,7 +23,7 @@ class MainActivityViewModel @Inject constructor(
 
     private fun checkSession() {
         viewModelScope.launch {
-            val startDestination = if (loginRepository.isLoggedIn()) MapuDestination.Guides else MapuDestination.Login
+            val startDestination = if (authRepository.isLoggedIn()) MapuDestination.Guides else MapuDestination.Login
             _uiState.value = MainUiState.Ready(startDestination)
         }
     }

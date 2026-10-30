@@ -1,6 +1,6 @@
-package com.viajacalu.mapu.feature.auth.domain
+package com.viajacalu.mapu.core.model
 
-data class AuthUser(
+data class User(
     val id: String,
     val name: String?,
     val email: String?,

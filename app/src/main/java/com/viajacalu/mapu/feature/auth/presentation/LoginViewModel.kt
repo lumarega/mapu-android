@@ -2,7 +2,7 @@ package com.viajacalu.mapu.feature.auth.presentation
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.viajacalu.mapu.feature.auth.domain.LoginRepository
+import com.viajacalu.mapu.core.auth.domain.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val loginRepository: LoginRepository
+    private val authRepository: AuthRepository
 ) : ViewModel() {
     private val _uiState = MutableStateFlow<LoginUiState>(LoginUiState.Idle)
     val uiState = _uiState.asStateFlow()
@@ -37,7 +37,7 @@ class LoginViewModel @Inject constructor(
 
     private fun signInWithGoogle(idToken: String) {
         viewModelScope.launch {
-            loginRepository.signInWithGoogle(idToken)
+            authRepository.signInWithGoogle(idToken)
                 .onSuccess { _uiState.value = LoginUiState.LoginSuccess }
                 .onFailure { showError(LoginError.SignInFailed) }
         }
