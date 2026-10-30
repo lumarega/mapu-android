@@ -1,6 +1,5 @@
 package com.viajacalu.mapu
 
-import androidx.activity.ComponentActivity
 import androidx.annotation.StringRes
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.test.SemanticsNodeInteraction
@@ -16,24 +15,46 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.testing.TestNavHostController
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import dagger.hilt.android.testing.BindValue
+import dagger.hilt.android.testing.HiltAndroidRule
+import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
+import dagger.hilt.android.testing.UninstallModules
+import com.viajacalu.mapu.core.auth.di.AuthModule
+import com.viajacalu.mapu.core.auth.domain.AuthRepository
 import com.viajacalu.mapu.core.designsystem.theme.MapuTheme
+import com.viajacalu.mapu.core.testing.FakeAuthRepository
+import com.viajacalu.mapu.core.testing.testUser
 import com.viajacalu.mapu.navigation.MapuDestination
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.annotation.Config
 
+// Screens get their ViewModels from Hilt, so the real Firebase auth is swapped for a fake signed in user
+@HiltAndroidTest
+@UninstallModules(AuthModule::class)
+@Config(application = HiltTestApplication::class)
 @RunWith(AndroidJUnit4::class)
 class MapuAppTest {
 
-    @get:Rule
-    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
+    @get:Rule(order = 0)
+    val hiltRule = HiltAndroidRule(this)
+
+    @get:Rule(order = 1)
+    val composeTestRule = createAndroidComposeRule<HiltTestActivity>()
+
+    @BindValue
+    @JvmField
+    val authRepository: AuthRepository = FakeAuthRepository(signedInUser = testUser)
 
     private lateinit var navController: TestNavHostController
 
     @Before
     fun setUp() {
+        hiltRule.inject()
         composeTestRule.setContent {
             navController = TestNavHostController(LocalContext.current).apply {
                 navigatorProvider.addNavigator(ComposeNavigator())

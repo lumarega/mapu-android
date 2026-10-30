@@ -13,4 +13,6 @@
     <string name="tab_profile">Perfil</string>
     <string name="guides_title">Guias</string>
     <string name="profile_title">Perfil</string>
+    <string name="profile_sign_out">Sair</string>
+    <string name="profile_version">%1$s · versão %2$s</string>
 </resources>

@@ -37,7 +37,7 @@ The login screen, it has a viewModel, a view and a repository. Users sign in wit
 - [x] Portuguese translations
 
 ### Home screen
-- [ ] Home - bottom navigation bar with 2 tabs: Guides and Profile. Navigating to a guide hides the bottom bar.
+- [x] Home - bottom navigation bar with 2 tabs: Guides and Profile. The bar only shows on the tabs, so it's hidden on Login and Guide details. Navigation tests with Robolectric.
 
 ### Guides tab
 
@@ -74,9 +74,14 @@ How the map works: I create one map per city in Google My Maps, shared as "anyon
 - [ ] Error state - message with a retry button when the map data can't be loaded.
 
 ### Profile tab
-- [ ] Display user information - name, email and photo from the Firebase user.
 
-- [ ] Sign out - signs out and goes back to the Login screen.
+A simpler version of the Profile mock-up for the MVP. The rest of the mock-up is in Future Features.
+
+- [x] Display user information - name, email and photo from the Firebase user, with the user's initials when there is no photo.
+
+- [x] Sign out - signs out of Firebase, clears the saved Google sign in and goes back to the Login screen.
+
+- [x] App version - shown below the Sign out button.
 
 ### Content
 - [ ] Create the My Maps guides - at least a couple of cities, with layers per category, descriptions and photos. Add them to `guides.json`.
@@ -97,6 +102,7 @@ Ideas for after the MVP. Still to be defined.
 - [ ] Custom maps - users copy pins from my guides into their own maps (e.g. "My London"). Stored per user in Firestore and drawn with the same map screen. Google My Maps has no API, so they can't be saved to the user's own My Maps.
 - [ ] Paid guides - sell access per guide. Needs the places to move from public My Maps to Firestore, with security rules that only let users who bought a guide read it.
 - [ ] Network error handling
+- [ ] Full Profile screen - the rest of the Profile mock-up: a "Signed in with Google" label, Preferences (Language, Appearance and Accessibility) and About (Privacy policy and Terms of use).
 
 ---
 

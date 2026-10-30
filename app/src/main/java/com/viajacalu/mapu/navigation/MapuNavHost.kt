@@ -7,7 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.viajacalu.mapu.feature.auth.presentation.LoginRoute
 import com.viajacalu.mapu.feature.guides.presentation.GuidesScreen
-import com.viajacalu.mapu.feature.profile.presentation.ProfileScreen
+import com.viajacalu.mapu.feature.profile.presentation.ProfileRoute
 
 @Composable
 fun MapuNavHost(
@@ -35,7 +35,14 @@ fun MapuNavHost(
         }
 
         composable<MapuDestination.Profile> {
-            ProfileScreen()
+            ProfileRoute(
+                onSignedOut = {
+                    // Clears the whole back stack, so back from Login leaves the app
+                    navController.navigate(MapuDestination.Login) {
+                        popUpTo(navController.graph.id) { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }
