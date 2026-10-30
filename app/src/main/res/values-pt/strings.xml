@@ -9,5 +9,8 @@
     <string name="login_play_services_update_dismiss">Agora não</string>
     <string name="login_error_play_services_unavailable">O Mapu não é compatível com este dispositivo. Ele precisa do Google Play Services para fazer login, e este dispositivo não tem.</string>
     <string name="login_error_sign_in_failed">Algo deu errado ao fazer seu login. Tente novamente.</string>
-    <string name="home_title">Início</string>
+    <string name="tab_guides">Guias</string>
+    <string name="tab_profile">Perfil</string>
+    <string name="guides_title">Guias</string>
+    <string name="profile_title">Perfil</string>
 </resources>

@@ -24,13 +24,13 @@ class MainActivityViewModelTest {
     }
 
     @Test
-    fun `when user is logged in start destination is Home`() = runTest {
+    fun `when user is logged in start destination is Guides`() = runTest {
         val viewModel = MainActivityViewModel(FakeLoginRepository(loggedIn = true))
 
         advanceUntilIdle()
 
         assertEquals(
-            MainUiState.Ready(MapuDestination.Home),
+            MainUiState.Ready(MapuDestination.Guides),
             viewModel.uiState.value
         )
     }

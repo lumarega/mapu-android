@@ -147,7 +147,7 @@ private fun SignInArea(
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         when (uiState) {
-            // Keeps showing progress on success until navigation to Home happens
+            // Keeps showing progress on success until navigation to Guides happens
             LoginUiState.Loading, LoginUiState.LoginSuccess -> SigningInIndicator()
 
             LoginUiState.Idle -> SignInButton(onClick = onSignInClick)

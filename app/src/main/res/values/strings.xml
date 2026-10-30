@@ -10,5 +10,8 @@
     <string name="login_play_services_update_dismiss">Not now</string>
     <string name="login_error_play_services_unavailable">Mapu isn\'t supported on this device. It needs Google Play services to sign in, which this device doesn\'t have.</string>
     <string name="login_error_sign_in_failed">Something went wrong signing you in. Please try again.</string>
-    <string name="home_title">Home</string>
+    <string name="tab_guides">Guides</string>
+    <string name="tab_profile">Profile</string>
+    <string name="guides_title">Guides</string>
+    <string name="profile_title">Profile</string>
 </resources>

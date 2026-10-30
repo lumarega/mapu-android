@@ -7,5 +7,8 @@ sealed interface MapuDestination {
     data object Login : MapuDestination
 
     @Serializable
-    data object Home : MapuDestination
+    data object Guides : MapuDestination
+
+    @Serializable
+    data object Profile : MapuDestination
 }

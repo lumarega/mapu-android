@@ -23,7 +23,7 @@ class MainActivityViewModel @Inject constructor(
 
     private fun checkSession() {
         viewModelScope.launch {
-            val startDestination = if (loginRepository.isLoggedIn()) MapuDestination.Home else MapuDestination.Login
+            val startDestination = if (loginRepository.isLoggedIn()) MapuDestination.Guides else MapuDestination.Login
             _uiState.value = MainUiState.Ready(startDestination)
         }
     }
