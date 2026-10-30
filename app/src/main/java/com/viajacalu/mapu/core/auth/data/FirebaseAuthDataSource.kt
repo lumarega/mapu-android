@@ -7,6 +7,7 @@ import com.viajacalu.mapu.core.model.User
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+// FirebaseAuth holds the user's Mapu account and keeps them signed in to the app
 class FirebaseAuthDataSource @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthDataSource {
@@ -20,7 +21,7 @@ class FirebaseAuthDataSource @Inject constructor(
         return user.toUser()
     }
 
-    override fun signOut() {
+    override suspend fun signOut() {
         firebaseAuth.signOut()
     }
 

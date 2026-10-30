@@ -7,5 +7,5 @@ interface AuthDataSource {
 
     suspend fun signInWithGoogle(idToken: String): User
 
-    fun signOut()
+    suspend fun signOut()
 }

@@ -23,7 +23,7 @@ class FakeAuthDataSource(
         ).also { signedInUser = it }
     }
 
-    override fun signOut() {
+    override suspend fun signOut() {
         signedInUser = null
     }
 }

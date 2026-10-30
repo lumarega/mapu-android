@@ -5,7 +5,9 @@ import com.viajacalu.mapu.core.model.User
 interface AuthRepository {
     fun isLoggedIn(): Boolean
 
+    fun getCurrentUser(): User?
+
     suspend fun signInWithGoogle(idToken: String): Result<User>
 
-    fun signOut()
+    suspend fun signOut()
 }

@@ -2,6 +2,7 @@ package com.viajacalu.mapu
 
 import com.viajacalu.mapu.core.testing.FakeAuthRepository
 import com.viajacalu.mapu.core.testing.MainDispatcherRule
+import com.viajacalu.mapu.core.testing.testUser
 import com.viajacalu.mapu.navigation.MapuDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
@@ -25,7 +26,7 @@ class MainActivityViewModelTest {
 
     @Test
     fun `when user is logged in start destination is Guides`() = runTest {
-        val viewModel = MainActivityViewModel(FakeAuthRepository(loggedIn = true))
+        val viewModel = MainActivityViewModel(FakeAuthRepository(signedInUser = testUser))
 
         advanceUntilIdle()
 
@@ -37,7 +38,7 @@ class MainActivityViewModelTest {
 
     @Test
     fun `when user is logged out start destination is Login`() = runTest {
-        val viewModel = MainActivityViewModel(FakeAuthRepository(loggedIn = false))
+        val viewModel = MainActivityViewModel(FakeAuthRepository(signedInUser = null))
 
         advanceUntilIdle()
 
