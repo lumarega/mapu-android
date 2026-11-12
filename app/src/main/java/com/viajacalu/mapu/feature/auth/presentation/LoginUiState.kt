@@ -9,6 +9,7 @@ sealed interface LoginUiState {
 
 enum class LoginError {
     NoGoogleAccount,
+    NoInternet,
     PlayServicesUpdateRequired,
     PlayServicesUnavailable,
     SignInFailed

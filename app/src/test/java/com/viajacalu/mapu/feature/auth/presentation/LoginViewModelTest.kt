@@ -126,4 +126,14 @@ class LoginViewModelTest {
 
         assertEquals(LoginUiState.Idle, viewModel.uiState.value)
     }
+
+    @Test
+    fun `when there is no internet shows no internet error`() {
+        val viewModel = LoginViewModel(repository)
+        viewModel.onSignInStarted()
+
+        viewModel.onGoogleSignInResult(GoogleSignInResult.NoInternet)
+
+        assertEquals(LoginUiState.Error(LoginError.NoInternet), viewModel.uiState.value)
+    }
 }

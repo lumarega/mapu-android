@@ -25,6 +25,7 @@ class LoginViewModel @Inject constructor(
             is GoogleSignInResult.Success -> signInWithGoogle(result.idToken)
             GoogleSignInResult.Cancelled -> _uiState.value = LoginUiState.Idle
             GoogleSignInResult.NoGoogleAccount -> showError(LoginError.NoGoogleAccount)
+            GoogleSignInResult.NoInternet -> showError(LoginError.NoInternet)
             GoogleSignInResult.PlayServicesUpdateRequired -> showError(LoginError.PlayServicesUpdateRequired)
             GoogleSignInResult.PlayServicesUnavailable -> showError(LoginError.PlayServicesUnavailable)
             is GoogleSignInResult.Failure -> showError(LoginError.SignInFailed)

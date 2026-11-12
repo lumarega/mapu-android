@@ -4,6 +4,8 @@ import android.app.PendingIntent
 import android.content.ActivityNotFoundException
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.core.net.toUri
 import androidx.credentials.Credential
@@ -27,9 +29,14 @@ class GoogleSignInRequester(private val context: Context) {
     private val credentialManager = CredentialManager.create(context)
     private val webClientId = context.getString(R.string.default_web_client_id)
     private val googleApiAvailability = GoogleApiAvailability.getInstance()
+    private val connectivityManager = context.getSystemService(ConnectivityManager::class.java)
 
     suspend fun requestIdToken(): GoogleSignInResult {
         checkPlayServices()?.let { return it }
+
+        // Google's account picker can't reach Google offline, and reports it to us as a cancellation,
+        // so we check the connection before opening it
+        if (!isOnline()) return GoogleSignInResult.NoInternet
 
         // Returning users: only accounts that signed in before, picked automatically when there is one
         val result = request(authorizedAccountsRequest())
@@ -65,6 +72,12 @@ class GoogleSignInRequester(private val context: Context) {
     // Credential Manager gets Google accounts from Play services, so it needs a recent enough version
     private fun playServicesStatus(): Int =
         googleApiAvailability.isGooglePlayServicesAvailable(context, MIN_PLAY_SERVICES_VERSION)
+
+    private fun isOnline(): Boolean {
+        val network = connectivityManager.activeNetwork ?: return false
+        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
+        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
+    }
 
     private fun checkPlayServices(): GoogleSignInResult? {
         val status = playServicesStatus()

@@ -171,6 +171,11 @@ private fun SignInArea(
                     SignInButton(onClick = onSignInClick)
                 }
 
+                LoginError.NoInternet -> {
+                    ErrorMessage(R.string.login_error_no_internet)
+                    SignInButton(onClick = onSignInClick)
+                }
+
                 LoginError.SignInFailed -> {
                     ErrorMessage(R.string.login_error_sign_in_failed)
                     SignInButton(onClick = onSignInClick)
@@ -298,6 +303,12 @@ fun LoginScreenLoadingPreview() {
 @Composable
 fun LoginScreenSignInFailedPreview() {
     LoginScreenPreview(LoginUiState.Error(LoginError.SignInFailed))
+}
+
+@Preview(device = Devices.PIXEL_7)
+@Composable
+fun LoginScreenNoInternetPreview() {
+    LoginScreenPreview(LoginUiState.Error(LoginError.NoInternet))
 }
 
 @Preview(device = Devices.PIXEL_7, uiMode = Configuration.UI_MODE_NIGHT_YES)
