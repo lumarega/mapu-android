@@ -75,6 +75,7 @@ Why this approach:
 - **Native experience** - custom pins and colours, dark mode, accessibility and a bottom sheet with place details, which an embedded My Maps web view can't offer.
 - **Free** - OpenFreeMap needs no API key or billing account. The Google Maps SDK needs a billing account, even though its native maps are free.
 - **Easy to change** - screens only use the app's own `Guide` and `Place` models. Moving the places to a backend or changing the map provider only changes the data source or the map composable.
+- **Ready for other sources** - the map screen shows any list of places, so a user's saved maps or a guide created with AI can use the same screen later, with a different data source.
 
 In the MVP, the guides list comes from a local JSON file, with the city details and the My Maps id for each guide.
 
@@ -86,9 +87,9 @@ In the MVP, the guides list comes from a local JSON file, with the city details 
 
 Ideas for after the MVP. Still to be defined.
 
-- **My maps tab** - a list of the guides the user saved, like favourites, stored per user in Firestore.
-- **Map styling** - customise the map style with the app colour palette, in light and dark mode.
-- **Guides from Firestore** - move the guides list to Firestore, only readable by signed-in users, so it can change without a new release.
-- **Custom maps** - users copy pins from the guides into their own maps (e.g. "My London"), which are saved in Firestore and drawn with the same map screen. Google My Maps has no API, so they can't be saved to the user's own My Maps account. Users can only copy places from the existing guides, not search for new ones, since Google charges for Places search.
-- **Paid guides** - sell access per guide. This means moving the places from public My Maps to Firestore, with security rules so only users who bought a guide can read it.
-- **Offline mode** - cache the guides and places, and store the map tiles offline (e.g. with Protomaps).
+The plan is to finish the MVP first, then add Firestore and My maps, then the AI guide creator, as each step builds on the one before.
+
+- **My maps** - a tab with the user's saved guides and their own custom maps (e.g. copying pins from my guides into "My London"), stored per user in Firestore and shown on the same map screen.
+- **AI guide creator (idea in progress)** - users answer a few questions about their trip (destination or "surprise me", days, interests, budget, food and hotel style) and an AI agent suggests places to see, eat and stay. They pick the ones they like and save them as one of their maps. Later versions could refine the guide by chatting with the agent, or build a day by day itinerary. Still being thought through: the backend, costs and how to make sure suggested places are real.
+
+For more details and the full list of tasks, see the [backlog](documentation/roadmap/BACKLOG.md).
