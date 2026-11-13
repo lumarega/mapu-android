@@ -3,6 +3,7 @@ package com.viajacalu.mapu.feature.auth.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.viajacalu.mapu.core.auth.domain.AuthRepository
+import com.viajacalu.mapu.core.network.NetworkUnavailableException
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -40,7 +41,13 @@ class LoginViewModel @Inject constructor(
         viewModelScope.launch {
             authRepository.signInWithGoogle(idToken)
                 .onSuccess { _uiState.value = LoginUiState.LoginSuccess }
-                .onFailure { showError(LoginError.SignInFailed) }
+                .onFailure { error ->
+                    val loginError = when (error) {
+                        is NetworkUnavailableException -> LoginError.NoInternet
+                        else -> LoginError.SignInFailed
+                    }
+                    showError(loginError)
+                }
         }
     }
 

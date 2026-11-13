@@ -195,7 +195,6 @@ Open questions:
 ## Bugs
 
 - [ ] Login screen sometimes keeps loading after skipping Google's add account screen. Couldn't reproduce it yet, needs investigating.
-- [ ] Login shows the generic error instead of the offline message when the connection drops after Google sign in, before Firebase answers. The connection is only checked before opening Google's account picker. Fix: FirebaseAuthDataSource converts Firebase's network error into a Mapu network error, so the ViewModel can show the offline message.
 
 ---
 
