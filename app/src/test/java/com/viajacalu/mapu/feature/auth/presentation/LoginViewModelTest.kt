@@ -1,5 +1,6 @@
 package com.viajacalu.mapu.feature.auth.presentation
 
+import com.viajacalu.mapu.core.network.NetworkUnavailableException
 import com.viajacalu.mapu.core.testing.FakeAuthRepository
 import com.viajacalu.mapu.core.testing.MainDispatcherRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -65,6 +66,18 @@ class LoginViewModelTest {
         advanceUntilIdle()
 
         assertEquals(LoginUiState.Error(LoginError.SignInFailed), viewModel.uiState.value)
+    }
+
+    @Test
+    fun `when Firebase can't be reached shows no internet error`() = runTest {
+        repository.signInError = NetworkUnavailableException()
+        val viewModel = LoginViewModel(repository)
+        viewModel.onSignInStarted()
+
+        viewModel.onGoogleSignInResult(GoogleSignInResult.Success("id-token"))
+        advanceUntilIdle()
+
+        assertEquals(LoginUiState.Error(LoginError.NoInternet), viewModel.uiState.value)
     }
 
     @Test

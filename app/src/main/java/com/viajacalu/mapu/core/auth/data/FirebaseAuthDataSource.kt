@@ -1,9 +1,11 @@
 package com.viajacalu.mapu.core.auth.data
 
+import com.google.firebase.FirebaseNetworkException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import com.viajacalu.mapu.core.model.User
+import com.viajacalu.mapu.core.network.NetworkUnavailableException
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
@@ -16,7 +18,11 @@ class FirebaseAuthDataSource @Inject constructor(
 
     override suspend fun signInWithGoogle(idToken: String): User {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
-        val result = firebaseAuth.signInWithCredential(credential).await()
+        val result = try {
+            firebaseAuth.signInWithCredential(credential).await()
+        } catch (e: FirebaseNetworkException) {
+            throw NetworkUnavailableException(e)
+        }
         val user = result.user ?: throw IllegalStateException("Firebase returned no user after sign in")
         return user.toUser()
     }
