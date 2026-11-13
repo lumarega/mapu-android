@@ -11,7 +11,15 @@ The goal is a working app where a signed-in user picks a city and sees a map wit
 
 - [x] Colour theme and typography
 
-- [ ] CI with GitHub Actions - a workflow that runs the unit tests, lint and a debug build on every push and pull request, so problems show up before they reach main.
+- [x] CI with GitHub Actions - a workflow that runs the unit tests, lint and a debug build on every pull request and after every merge to main.
+
+- [x] Protect main - changes only go in through pull requests, and CI has to pass before merging.
+
+- [ ] ktlint - check Kotlin formatting in CI (indentation, imports, spacing, ...), with a Gradle task that fixes it automatically, so all code follows the same style.
+
+- [ ] Gradle modules - split the app into modules (e.g. `:core:auth`, `:core:model`, `:feature:guides`). Gradle then enforces the architecture: a feature can't use another feature or anything it doesn't depend on, without needing an extra library.
+
+- [ ] Kover - test coverage reports from JetBrains, with a minimum coverage in CI for the logic (data layer, domain and ViewModels), so new logic comes with tests.
 
 ### Launch screen
 - [x] Launch screen and VM - doesn't do anything for now
@@ -43,7 +51,7 @@ The login screen, it has a viewModel, a view and a repository. Users sign in wit
 
 ### Guides tab
 
-A list of the available guides. It has a ViewModel, a guides repository (fetched from a local JSON file in the MVP) and a view.
+A list of the available guides. It has a ViewModel, a guides repository and a view. The guides start in a local JSON file, then move to Firestore before the MVP is released.
 
 The `Guide` model and the guides repository live in `core`, not in the Guides feature, because the Guide details screen and the future My maps tab need them too.
 
@@ -57,11 +65,13 @@ The `Guide` model and the guides repository live in `core`, not in the Guides fe
 
 - [ ] Navigation to Guide details - passes only the guide id in the route.
 
+- [ ] Guides from Firestore - move the guides from `guides.json` to Firestore, readable only by signed-in users, so the list can change without a new app release.
+
 ### Guide details screen
 
 Shows the city map with my suggested places. It has a ViewModel, a view and a repository that reads the guide's My Maps KML.
 
-How the map works: I create one map per city in Google My Maps, shared as "anyone with the link", with one layer per category (Restaurants, Museums, Parks, ...). The app downloads the map as KML, turns it into its own `Place` models and draws the pins natively with MapLibre on an OpenFreeMap base map. This is free, needs no API key or billing account, and keeps the screens independent of where the data comes from.
+How the map works: I create one map per city in Google My Maps, shared as "anyone with the link", with one layer per category (Restaurants, Museums, Parks, ...). The app downloads the map as KML (Keyhole Markup Language, an XML file format for map data used by Google Earth and My Maps, with each place's name, description, coordinates and layer), turns it into its own `Place` models and draws the pins natively with MapLibre on an OpenFreeMap base map. This is free, needs no API key or billing account, and keeps the screens independent of where the data comes from.
 
 Built for later: the map screen shows any list of `Place`s, not only ones from My Maps. A curated guide, a user's saved map (My maps) and a guide created with AI should all open in the same map screen, only with a different data source. To keep that possible:
 - `Place` and `PlaceCategory` live in `core/model`, with general categories (restaurants, cafés, museums, parks, viewpoints, beaches, hotels, ...) that any source can map to
@@ -70,7 +80,7 @@ Built for later: the map screen shows any list of `Place`s, not only ones from M
 
 - [ ] Map set up - add MapLibre and show the OpenFreeMap base map (Positron style) centred on the city, with the OpenStreetMap attribution.
 
-- [ ] KML data source and parser - download `https://www.google.com/maps/d/kml?mid=<mapId>&forcekml=1` and parse each placemark into a `Place` (id, name, description, category, location, photo urls). The layer name gives the category. Unit tests with a sample KML file.
+- [ ] KML data source and parser - download `https://www.google.com/maps/d/kml?mid=<mapId>&forcekml=1` and parse each placemark into a `Place` (id, name, description, category, location, photo urls). The layer name gives the category. Unit tests with a sample KML file. Network failures become a Mapu network error, so the screen can show an offline message. OkHttp is already in the project through Coil, so the download doesn't need a new library.
 
 - [ ] Guide details repository and ViewModel - sealed state for Loading, Loaded and Error.
 
@@ -93,7 +103,35 @@ A simpler version of the Profile mock-up for the MVP. The rest of the mock-up is
 - [x] App version - shown below the Sign out button.
 
 ### Content
+- [ ] Check a real KML early - create one real map in My Maps (layers per category, a few places with descriptions and photos) and check what its KML contains before writing the parser, so the parser matches real data.
+
 - [ ] Create the My Maps guides - at least a couple of cities, with layers per category, descriptions and photos. Add them to `guides.json`.
+
+### Fixes and checks
+- [ ] Fix the Login bugs (see Bugs).
+
+- [ ] Accessibility and Portuguese review of the new screens - screen reader, large text and dark mode.
+
+- [ ] Manual test pass on a device or emulator - sign in, browse guides, map, place details, sign out and offline.
+
+### Ready for the Play Store
+- [ ] App icon - replace Android Studio's default icon with a Mapu icon in the app palette. 
+
+- [ ] Set up a splash screen.
+
+- [ ] App identity - app name and version name (e.g. 0.1.0).
+
+- [ ] Release build - turn on code shrinking (R8) with any keep rules needed, sign with an upload key that isn't stored in the repo, and test the release build.
+
+- [ ] Privacy policy - required by the Play Store, as the app uses Google sign in (name, email and photo). Create a simple hosted page.
+
+- [ ] Play Console - set up developer account, store listing, Data safety form, content rating and upload the first apk to the internal testing track.
+
+- [ ] Firebase and Google Cloud - add the Play app signing SHA-1, or Google sign in won't work in release builds downloaded from the Play Store.
+
+- [ ] README - update with real screenshots instead of the mock-ups, and instructions on how to run the project.
+
+- [ ] Optional: release workflow - a GitHub Actions workflow that builds, signs and uploads a release to the internal testing track when a release version is pushed.
 
 ---
 
@@ -107,9 +145,7 @@ The plan is to finish the MVP first (Guides and the map), then Firestore and My 
 
 Saving places per user is needed before the AI guide creator, as its results have to be saved somewhere.
 
-- [x] Integrate Google Sign-In
 - [ ] My maps tab - a tab in the bottom bar with the user's saved guides and maps. Stored per user in Firestore.
-- [ ] Guides from Firestore - move `guides.json` to Firestore, readable only by signed-in users, so the list can change without a new app release.
 - [ ] Custom maps - users copy pins from my guides into their own maps (e.g. "My London"). Stored per user in Firestore and drawn with the same map screen. Google My Maps has no API, so they can't be saved to the user's own My Maps.
 
 ### Idea in progress: AI guide creator
@@ -159,6 +195,7 @@ Open questions:
 ## Bugs
 
 - [ ] Login screen sometimes keeps loading after skipping Google's add account screen. Couldn't reproduce it yet, needs investigating.
+- [ ] Login shows the generic error instead of the offline message when the connection drops after Google sign in, before Firebase answers. The connection is only checked before opening Google's account picker. Fix: FirebaseAuthDataSource converts Firebase's network error into a Mapu network error, so the ViewModel can show the offline message.
 
 ---
 
@@ -166,4 +203,4 @@ Open questions:
 
 - [x] Add Hilt for dependency injection
 - [ ] The My Maps KML url isn't an official API and could change. If it stops working, bundle the KML files in the app or move the places to Firestore (only the data source changes).
-- [ ] OpenFreeMap has no uptime guarantee. If it becomes a problem, self host the tiles (OpenFreeMap or Protomaps) or move to a paid provider by changing the style url.
+- [ ] OpenFreeMap works well for this sample app but has no uptime guarantee. If it becomes a problem, might need to self host the tiles (OpenFreeMap or Protomaps) or move to a paid provider.

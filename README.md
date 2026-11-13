@@ -68,7 +68,7 @@ Errors appear in a card above the Sign in button, so screen readers announce the
 
 ## Maps
 
-Each city guide is a map I create in Google My Maps, with one layer per category (Restaurants, Museums, Parks, ...). The app downloads the map as KML, turns each pin into a `Place` and draws it natively with [MapLibre](https://maplibre.org) on an [OpenFreeMap](https://openfreemap.org) base map.
+Each city guide is a map I create in Google My Maps, with one layer per category (Restaurants, Museums, Parks, ...). The app downloads the map as KML (Keyhole Markup Language, an XML file format for map data used by Google Earth and My Maps), turns each pin into a `Place` and draws it natively with [MapLibre](https://maplibre.org) on an [OpenFreeMap](https://openfreemap.org) base map.
 
 Why this approach:
 - **Easy to edit** - places are managed in My Maps, so updating a guide doesn't need a new app release.
@@ -77,7 +77,7 @@ Why this approach:
 - **Easy to change** - screens only use the app's own `Guide` and `Place` models. Moving the places to a backend or changing the map provider only changes the data source or the map composable.
 - **Ready for other sources** - the map screen shows any list of places, so a user's saved maps or a guide created with AI can use the same screen later, with a different data source.
 
-In the MVP, the guides list comes from a local JSON file, with the city details and the My Maps id for each guide.
+The guides list, with the city details and the My Maps id for each guide, starts as a local JSON file and moves to Firestore, so guides can be added or changed without a new app release.
 
 ## Architecture
 
