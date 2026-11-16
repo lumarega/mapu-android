@@ -1,6 +1,6 @@
 package com.viajacalu.mapu.core.testing
 
-import com.viajacalu.mapu.core.auth.domain.AuthRepository
+import com.viajacalu.mapu.core.data.auth.AuthRepository
 import com.viajacalu.mapu.core.model.User
 
 val testUser = User(

@@ -2,7 +2,7 @@ package com.viajacalu.mapu
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.viajacalu.mapu.core.auth.domain.AuthRepository
+import com.viajacalu.mapu.core.data.auth.AuthRepository
 import com.viajacalu.mapu.navigation.MapuDestination
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

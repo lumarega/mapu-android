@@ -20,8 +20,8 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.HiltTestApplication
 import dagger.hilt.android.testing.UninstallModules
-import com.viajacalu.mapu.core.auth.di.AuthModule
-import com.viajacalu.mapu.core.auth.domain.AuthRepository
+import com.viajacalu.mapu.core.data.auth.AuthRepository
+import com.viajacalu.mapu.core.data.di.AuthModule
 import com.viajacalu.mapu.core.designsystem.theme.MapuTheme
 import com.viajacalu.mapu.core.testing.FakeAuthRepository
 import com.viajacalu.mapu.core.testing.testUser
