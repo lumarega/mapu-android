@@ -5,9 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.viajacalu.mapu.feature.auth.presentation.LoginRoute
-import com.viajacalu.mapu.feature.guides.presentation.GuidesScreen
-import com.viajacalu.mapu.feature.profile.presentation.ProfileRoute
+import com.viajacalu.mapu.feature.guides.GuidesScreen
+import com.viajacalu.mapu.feature.login.LoginRoute
+import com.viajacalu.mapu.feature.profile.ProfileRoute
 
 @Composable
 fun MapuNavHost(
