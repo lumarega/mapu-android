@@ -10,7 +10,7 @@ plugins {
 android {
     namespace = "com.viajacalu.mapu"
     compileSdk {
-        version = release(36) {
+        version = release(37) {
             minorApiLevel = 1
         }
     }
