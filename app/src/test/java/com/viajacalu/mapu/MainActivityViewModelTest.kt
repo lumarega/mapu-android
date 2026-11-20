@@ -3,7 +3,6 @@ package com.viajacalu.mapu
 import com.viajacalu.mapu.core.testing.FakeAuthRepository
 import com.viajacalu.mapu.core.testing.MainDispatcherRule
 import com.viajacalu.mapu.core.testing.testUser
-import com.viajacalu.mapu.navigation.MapuDestination
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.runTest
@@ -18,33 +17,27 @@ class MainActivityViewModelTest {
     val mainDispatcherRule = MainDispatcherRule()
 
     @Test
-    fun `initial state is Loading`() {
+    fun `initial state is Checking`() {
         val viewModel = MainActivityViewModel(FakeAuthRepository())
 
-        assertEquals(MainUiState.Loading, viewModel.uiState.value)
+        assertEquals(SessionState.Checking, viewModel.sessionState.value)
     }
 
     @Test
-    fun `when user is logged in start destination is Guides`() = runTest {
+    fun `when user is logged in state is SignedIn`() = runTest {
         val viewModel = MainActivityViewModel(FakeAuthRepository(signedInUser = testUser))
 
         advanceUntilIdle()
 
-        assertEquals(
-            MainUiState.Ready(MapuDestination.Guides),
-            viewModel.uiState.value
-        )
+        assertEquals(SessionState.SignedIn, viewModel.sessionState.value)
     }
 
     @Test
-    fun `when user is logged out start destination is Login`() = runTest {
+    fun `when user is logged out state is SignedOut`() = runTest {
         val viewModel = MainActivityViewModel(FakeAuthRepository(signedInUser = null))
 
         advanceUntilIdle()
 
-        assertEquals(
-            MainUiState.Ready(MapuDestination.Login),
-            viewModel.uiState.value
-        )
+        assertEquals(SessionState.SignedOut, viewModel.sessionState.value)
     }
 }

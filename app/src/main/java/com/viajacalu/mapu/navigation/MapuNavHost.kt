@@ -4,15 +4,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import com.viajacalu.mapu.feature.guides.GuidesScreen
-import com.viajacalu.mapu.feature.login.LoginRoute
-import com.viajacalu.mapu.feature.profile.ProfileRoute
+import androidx.navigation.navOptions
+import com.viajacalu.mapu.feature.guides.guidesScreen
+import com.viajacalu.mapu.feature.guides.navigateToGuides
+import com.viajacalu.mapu.feature.login.LoginDestination
+import com.viajacalu.mapu.feature.login.loginScreen
+import com.viajacalu.mapu.feature.login.navigateToLogin
+import com.viajacalu.mapu.feature.profile.profileScreen
 
+// Each feature adds its own screens to the graph, and this file connects them
 @Composable
 fun MapuNavHost(
     navController: NavHostController,
-    startDestination: MapuDestination,
+    startDestination: Any,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -20,29 +24,23 @@ fun MapuNavHost(
         startDestination = startDestination,
         modifier = modifier
     ) {
-        composable<MapuDestination.Login> {
-            LoginRoute(
-                onSignedIn = {
-                    navController.navigate(MapuDestination.Guides) {
-                        popUpTo<MapuDestination.Login> { inclusive = true }
-                    }
-                }
-            )
-        }
+        loginScreen(
+            onSignedIn = {
+                navController.navigateToGuides(
+                    navOptions { popUpTo<LoginDestination> { inclusive = true } }
+                )
+            }
+        )
 
-        composable<MapuDestination.Guides> {
-            GuidesScreen()
-        }
+        guidesScreen()
 
-        composable<MapuDestination.Profile> {
-            ProfileRoute(
-                onSignedOut = {
-                    // Clears the whole back stack, so back from Login leaves the app
-                    navController.navigate(MapuDestination.Login) {
-                        popUpTo(navController.graph.id) { inclusive = true }
-                    }
-                }
-            )
-        }
+        profileScreen(
+            onSignedOut = {
+                // Clears the whole back stack, so back from Login leaves the app
+                navController.navigateToLogin(
+                    navOptions { popUpTo(navController.graph.id) { inclusive = true } }
+                )
+            }
+        )
     }
 }

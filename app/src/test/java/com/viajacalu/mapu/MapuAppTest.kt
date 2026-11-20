@@ -25,7 +25,8 @@ import com.viajacalu.mapu.core.data.di.AuthModule
 import com.viajacalu.mapu.core.designsystem.theme.MapuTheme
 import com.viajacalu.mapu.core.testing.FakeAuthRepository
 import com.viajacalu.mapu.core.testing.testUser
-import com.viajacalu.mapu.navigation.MapuDestination
+import com.viajacalu.mapu.feature.guides.GuidesDestination
+import com.viajacalu.mapu.feature.profile.ProfileDestination
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -60,7 +61,7 @@ class MapuAppTest {
                 navigatorProvider.addNavigator(ComposeNavigator())
             }
             MapuTheme {
-                MapuApp(startDestination = MapuDestination.Guides, navController = navController)
+                MapuApp(sessionState = SessionState.SignedIn, navController = navController)
             }
         }
     }
@@ -98,8 +99,8 @@ class MapuAppTest {
         tab(R.string.tab_profile).performClick()
 
         composeTestRule.runOnIdle {
-            assertEquals(1, navController.backStack.count { it.destination.hasRoute<MapuDestination.Guides>() })
-            assertEquals(1, navController.backStack.count { it.destination.hasRoute<MapuDestination.Profile>() })
+            assertEquals(1, navController.backStack.count { it.destination.hasRoute<GuidesDestination>() })
+            assertEquals(1, navController.backStack.count { it.destination.hasRoute<ProfileDestination>() })
         }
     }
 

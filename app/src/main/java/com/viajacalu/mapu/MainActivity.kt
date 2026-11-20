@@ -22,15 +22,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+            val sessionState by viewModel.sessionState.collectAsStateWithLifecycle()
 
             MapuTheme {
                 // Paints the app background while the session is being checked
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    when (val state = uiState) {
-                        MainUiState.Loading -> Unit
-                        is MainUiState.Ready -> MapuApp(startDestination = state.startDestination)
-                    }
+                    MapuApp(sessionState = sessionState)
                 }
             }
         }

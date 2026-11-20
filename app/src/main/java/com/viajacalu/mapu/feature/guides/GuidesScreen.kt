@@ -13,7 +13,7 @@ import com.viajacalu.mapu.R
 import com.viajacalu.mapu.core.designsystem.theme.MapuTheme
 
 @Composable
-fun GuidesScreen(modifier: Modifier = Modifier) {
+internal fun GuidesScreen(modifier: Modifier = Modifier) {
     Text(
         text = stringResource(R.string.guides_title),
         modifier = modifier

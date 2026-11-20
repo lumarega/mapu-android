@@ -53,7 +53,7 @@ import com.viajacalu.mapu.core.designsystem.theme.MapuTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun LoginRoute(
+internal fun LoginRoute(
     onSignedIn: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: LoginViewModel = hiltViewModel()

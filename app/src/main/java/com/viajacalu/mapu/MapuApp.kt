@@ -10,7 +10,8 @@ import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.viajacalu.mapu.navigation.MapuDestination
+import com.viajacalu.mapu.feature.guides.GuidesDestination
+import com.viajacalu.mapu.feature.login.LoginDestination
 import com.viajacalu.mapu.navigation.MapuNavHost
 import com.viajacalu.mapu.navigation.MapuNavigationBar
 import com.viajacalu.mapu.navigation.TopLevelDestination
@@ -18,14 +19,21 @@ import com.viajacalu.mapu.navigation.navigateToTab
 
 @Composable
 fun MapuApp(
-    startDestination: MapuDestination,
+    sessionState: SessionState,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController()
 ) {
+    val startDestination = when (sessionState) {
+        // Nothing to show until we know whether the user is signed in
+        SessionState.Checking -> return
+        SessionState.SignedIn -> GuidesDestination
+        SessionState.SignedOut -> LoginDestination
+    }
+
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
     // Null on screens that aren't tabs, like Login, so the bottom bar is hidden there
     val currentTab = TopLevelDestination.entries.firstOrNull { tab ->
-        currentBackStackEntry?.destination?.hasRoute(tab.route::class) == true
+        currentBackStackEntry?.destination?.hasRoute(tab.route) == true
     }
 
     Scaffold(
