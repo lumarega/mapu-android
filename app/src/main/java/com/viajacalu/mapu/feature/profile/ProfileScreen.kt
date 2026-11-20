@@ -51,7 +51,7 @@ import com.viajacalu.mapu.core.designsystem.theme.Manrope
 import com.viajacalu.mapu.core.designsystem.theme.MapuTheme
 
 @Composable
-fun ProfileRoute(
+internal fun ProfileRoute(
     onSignedOut: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: ProfileViewModel = hiltViewModel()
