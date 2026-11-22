@@ -1,8 +1,9 @@
 package com.viajacalu.mapu.core.data.guides
 
 import com.viajacalu.mapu.core.model.Guide
-import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 
@@ -19,7 +20,17 @@ class GuidesRepositoryImplTest {
     fun `getGuides returns guides from the data source`() = runTest{
 
         val result = repository.getGuides()
-        assertEquals(listOf(londonGuide, lisbonGuide), result)
+        assertEquals(Result.success(listOf(londonGuide, lisbonGuide)), result)
+    }
+
+    @Test
+    fun `getGuides returns a failure when there's an error`() = runTest {
+        val error = Exception("Error reading file")
+        dataSource.error = error
+
+        val result = repository.getGuides()
+        assertTrue(result.isFailure)
+        assertEquals(error, result.exceptionOrNull())
     }
 
 
