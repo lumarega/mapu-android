@@ -17,4 +17,7 @@
     <string name="profile_title">Profile</string>
     <string name="profile_sign_out">Sign out</string>
     <string name="profile_version">%1$s · version %2$s</string>
+    <string name="guides_subtitle" translatable="false">%1$s · %2$s</string>
+    <string name="guides_error">We couldn\'t load the guides. Please try again.</string>
+    <string name="guides_try_again">Try again</string>
 </resources>

@@ -13,6 +13,6 @@ fun NavController.navigateToGuides(navOptions: NavOptions? = null) = navigate(Gu
 
 fun NavGraphBuilder.guidesScreen() {
     composable<GuidesDestination> {
-        GuidesScreen()
+        GuidesRoute()
     }
 }
