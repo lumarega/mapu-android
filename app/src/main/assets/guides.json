@@ -1,0 +1,47 @@
+[
+  {
+    "id": "london",
+    "name": "London",
+    "country": "England",
+    "region": "Europe",
+    "tagline": "Markets, museums, pubs",
+    "myMapsId": "1UgQilr5Bsm4NBHOR6f5l7cKb1cANRHc",
+    "isFeatured": true
+  },
+  {
+    "id": "edinburgh",
+    "name": "Edinburgh",
+    "country": "Scotland",
+    "region": "Europe",
+    "tagline": "Old Town, hikes, whisky",
+    "myMapsId": "1jXRvAtmBTIzOxJM82O7Fict-cofYV00",
+    "isFeatured": false
+  },
+  {
+    "id": "iceland",
+    "name": "Iceland",
+    "country": "Iceland",
+    "region": "Europe",
+    "tagline": "Waterfalls, hot springs, road trips",
+    "myMapsId": "1lJ5W2smtU4128CcFyCSSxolxtxYKG4c",
+    "isFeatured": false
+  },
+  {
+    "id": "manchester",
+    "name": "Manchester",
+    "country": "England",
+    "region": "Europe",
+    "tagline": "Music, football, food halls",
+    "myMapsId": "1g962ZXtApuGlP4M9RoxyXA88SgJk-tk",
+    "isFeatured": false
+  },
+  {
+    "id": "liverpool",
+    "name": "Liverpool",
+    "country": "England",
+    "region": "Europe",
+    "tagline": "Docks, The Beatles, galleries",
+    "myMapsId": "1Wy3MgB5g6wygRGx_wvoe8_3hPBGCEBU",
+    "isFeatured": false
+  }
+]
